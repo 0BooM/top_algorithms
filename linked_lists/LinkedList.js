@@ -1,13 +1,15 @@
-import Node from "./Node";
+import Node from "./Node.js";
 
-class LinkedList {
+export default class LinkedList {
   constructor() {
     this.listHead = null;
   }
 
   append(value) {
+    let newNode = new Node(value);
+
     if (!this.listHead) {
-      this.listHead = new Node(value);
+      this.listHead = newNode;
       return;
     }
 
@@ -15,6 +17,11 @@ class LinkedList {
     while (tmp.nextNode) {
       tmp = tmp.nextNode;
     }
-    tmp.nextNode = new Node(value);
+    tmp.nextNode = newNode;
+  }
+
+  prepend(value) {
+    let newNode = new Node(value, this.listHead);
+    this.listHead = newNode;
   }
 }
