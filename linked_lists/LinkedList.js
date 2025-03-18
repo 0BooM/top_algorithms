@@ -41,26 +41,26 @@ export default class LinkedList {
     head() {
         return this.listHead;
     }
-
-    tail(){
+    // returns the last node in the list
+    tail() {
         if (!this.listHead) return null;
 
         let tmp = this.listHead;
-        while(tmp.nextNode){
+        while (tmp.nextNode) {
             tmp = tmp.nextNode;
         }
 
         return tmp;
     }
-
-    at(index){
+    // returns the node at the given index
+    at(index) {
         let counter = 0;
-        if (!this.listHead) return null; 
-        
+        if (!this.listHead) return null;
+
         let tmp = this.listHead;
 
-        while(tmp){
-            if(counter == index){
+        while (tmp) {
+            if (counter == index) {
                 return tmp;
             }
 
