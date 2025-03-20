@@ -25,6 +25,7 @@ export default class LinkedList {
         let newNode = new Node(value, this.listHead);
         this.listHead = newNode;
     }
+    
     // returns the total number of nodes in the list
     size() {
         let counter = 0;
@@ -71,16 +72,30 @@ export default class LinkedList {
     }
 
     // returns true if the passed in value is in the list and otherwise returns false.
-    contains(value){
+    contains(value) {
         if (!this.listHead) return false;
 
         let tmp = this.listHead;
-        while(tmp){
+        while (tmp) {
             if (value == tmp.value) {
                 return true;
             }
             tmp = tmp.nextNode;
         }
         return false;
+    }
+
+    // returns the index of the node containing value, or null if not found.
+    find(value){
+        if (!this.listHead) return null;
+
+        let index = 0;
+        let tmp = this.listHead;
+        while(tmp){
+            if(tmp.value === value) return index
+            index++;
+            tmp = tmp.nextNode;
+        }
+        return null;
     }
 }
