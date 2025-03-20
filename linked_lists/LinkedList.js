@@ -147,5 +147,23 @@ export default class LinkedList {
         return null;
     }
 
-    removeAt(index) {}
+    removeAt(index) {
+        if (!this.listHead) return null;
+        if(index === 0) {
+            this.listHead = this.listHead.nextNode;
+            return;
+        }
+
+        let counter = 0;
+        let tmp = this.listHead;
+        while(tmp.nextNode){
+            if(counter == index - 1){
+                tmp.nextNode = tmp.nextNode.nextNode || null;
+                return;
+            }
+            counter++;
+            tmp = tmp.nextNode;
+        }
+        return;
+    }
 }
