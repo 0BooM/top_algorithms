@@ -25,7 +25,7 @@ export default class LinkedList {
         let newNode = new Node(value, this.listHead);
         this.listHead = newNode;
     }
-    
+
     // returns the total number of nodes in the list
     size() {
         let counter = 0;
@@ -97,5 +97,16 @@ export default class LinkedList {
             tmp = tmp.nextNode;
         }
         return null;
+    }
+
+    toString(){
+        if (!this.listHead) return "null";
+        let string = "";
+        let tmp = this.listHead;
+        while(tmp){
+            string += `( ${tmp.value} ) -> `;
+            tmp = tmp.nextNode;
+        }
+        return string + "null"
     }
 }
