@@ -86,27 +86,49 @@ export default class LinkedList {
     }
 
     // returns the index of the node containing value, or null if not found.
-    find(value){
+    find(value) {
         if (!this.listHead) return null;
 
         let index = 0;
         let tmp = this.listHead;
-        while(tmp){
-            if(tmp.value === value) return index
+        while (tmp) {
+            if (tmp.value === value) return index;
             index++;
             tmp = tmp.nextNode;
         }
         return null;
     }
 
-    toString(){
+    toString() {
         if (!this.listHead) return "null";
         let string = "";
         let tmp = this.listHead;
-        while(tmp){
+        while (tmp) {
             string += `( ${tmp.value} ) -> `;
             tmp = tmp.nextNode;
         }
-        return string + "null"
+        return string + "null";
+    }
+
+    // inserts a new node with the provided value at the given index
+    insertAt(value, index) {
+        if (index === 0) {
+            this.prepend(value);
+            return;
+        }
+
+        let newNode = new Node(value);
+        let counter = 0;
+        let tmp = this.listHead;
+
+        while (tmp) {
+            if (counter === index - 1) {
+                newNode.nextNode = tmp.nextNode;
+                tmp.nextNode = newNode;
+            }
+            counter++;
+            tmp = tmp.nextNode;
+        }
+        return null;
     }
 }
