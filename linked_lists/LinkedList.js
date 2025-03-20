@@ -71,6 +71,21 @@ export default class LinkedList {
         return null;
     }
 
+    // removes the last element from the list
+    pop() {
+        if (!this.listHead) return null;
+        if (!this.listHead.nextNode) {
+            this.listHead = null;
+            return;
+        }
+
+        let tmp = this.listHead;
+        while (tmp.nextNode.nextNode) {
+            tmp = tmp.nextNode;
+        }
+        tmp.nextNode = null;
+    }
+
     // returns true if the passed in value is in the list and otherwise returns false.
     contains(value) {
         if (!this.listHead) return false;
@@ -131,4 +146,6 @@ export default class LinkedList {
         }
         return null;
     }
+
+    removeAt(index) {}
 }
