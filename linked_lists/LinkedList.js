@@ -69,4 +69,18 @@ export default class LinkedList {
         }
         return null;
     }
+
+    // returns true if the passed in value is in the list and otherwise returns false.
+    contains(value){
+        if (!this.listHead) return false;
+
+        let tmp = this.listHead;
+        while(tmp){
+            if (value == tmp.value) {
+                return true;
+            }
+            tmp = tmp.nextNode;
+        }
+        return false;
+    }
 }
