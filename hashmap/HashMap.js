@@ -24,4 +24,11 @@ class HashMap{
         this.bucketArray[hashCode] = value;
         console.log(`Hashcode: ${hashedValue}, bucketArray[haschode]: ${this.bucketArray[hashedValue]} `)
     }
+
+    // returns value that is asigned to key
+    get(key){
+        hashCode = hash(key);
+
+        return this.bucketArray[hashCode] ? this.bucketArray[hashCode] : null;
+    }
 }
