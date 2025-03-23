@@ -31,4 +31,11 @@ class HashMap{
 
         return this.bucketArray[hashCode] ? this.bucketArray[hashCode] : null;
     }
+
+    // returns true or false based on whether passed key exists in array or not
+    has(key){
+        hashCode = hash(key);
+        
+        return this.bucketArray[hashCode] ? true : null;
+    }
 }
