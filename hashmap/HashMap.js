@@ -17,4 +17,11 @@ class HashMap{
         return hashCode;
     } 
 
+    //Sets new value at by calculating hashCode using key value
+    set(key, value){
+        hashCode = hash(key);
+        
+        this.bucketArray[hashCode] = value;
+        console.log(`Hashcode: ${hashedValue}, bucketArray[haschode]: ${this.bucketArray[hashedValue]} `)
+    }
 }
