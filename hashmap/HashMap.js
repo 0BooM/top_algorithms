@@ -1,6 +1,6 @@
-class HashMap {
+export default class HashMap {
     constructor() {
-        this.bucketArray = new Array(10).fill(null);
+        this.bucketArray = new Array(16).fill(null);
         this.capacity = this.bucketArray.length;
         this.loadFactor = 0.75;
     }
@@ -20,24 +20,23 @@ class HashMap {
 
     //Sets new value at by calculating hashCode using key value
     set(key, value) {
-        hashCode = this.hash(key);
-
+        if(this.length() >= this.capacity * this.loadFactor){
+            this.resize();
+        } 
+        let hashCode = this.hash(key);
         this.bucketArray[hashCode] = value;
-        console.log(
-            `Hashcode: ${hashedValue}, bucketArray[haschode]: ${this.bucketArray[hashedValue]} `
-        );
     }
 
     // returns value that is asigned to key
     get(key) {
-        hashCode = this.hash(key);
+        let hashCode = this.hash(key);
 
         return this.bucketArray[hashCode] ? this.bucketArray[hashCode] : null;
     }
 
     // returns true or false based on whether passed key exists in array or not
     has(key) {
-        hashCode = this.hash(key);
+        let hashCode = this.hash(key);
 
         return this.bucketArray[hashCode] ? true : false;
     }
@@ -55,5 +54,45 @@ class HashMap {
     // returns the number of stored keys in the hash map
     length() {
         return this.bucketArray.filter((item) => item !== null).length;
+    }
+
+    //removes all entries in the hash map.
+    clear() {
+        this.bucketArray = new Array(this.capacity).fill(null);
+    }
+
+    //returns an array containing all the keys inside the hash map.
+    keys() {
+        let keys = [];
+        this.bucketArray.forEach((bucket, index) => {
+            if (bucket !== null) {
+                // Jeśli wartość w danym indeksie nie jest null
+                keys.push(index); // Dodajemy indeks do tablicy keys
+            }
+        });
+        return keys;
+    }
+
+    //returns an array containing all the values.
+    values() {
+        let values = [];
+        this.bucketArray.forEach((value) => {
+            if (value) {
+                values.push(value);
+            }
+        });
+
+        return values;
+    }
+
+    entries(){
+        let entries = []
+        this.bucketArray.forEach((value, index) => {
+            if(value){
+                entries.push([index, value]);
+            }
+        })
+
+        return entries
     }
 }
