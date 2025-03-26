@@ -19,10 +19,24 @@ export default class HashMap {
     }
 
     //Sets new value at by calculating hashCode using key value
+    resize() {
+        const newCapacity = this.capacity * 2;
+        const newBucketArray = new Array(newCapacity).fill(null);
+
+        this.bucketArray.forEach((value, index) => {
+            if (value !== null) {
+                const hashCode = this.hash(index.toString());
+                newBucketArray[hashCode] = value;
+            }
+        });
+
+        this.bucketArray = newBucketArray;
+        this.capacity = newCapacity;
+    }
     set(key, value) {
-        if(this.length() >= this.capacity * this.loadFactor){
+        if (this.length() >= this.capacity * this.loadFactor) {
             this.resize();
-        } 
+        }
         let hashCode = this.hash(key);
         this.bucketArray[hashCode] = value;
     }
@@ -85,14 +99,14 @@ export default class HashMap {
         return values;
     }
 
-    entries(){
-        let entries = []
+    entries() {
+        let entries = [];
         this.bucketArray.forEach((value, index) => {
-            if(value){
+            if (value) {
                 entries.push([index, value]);
             }
-        })
+        });
 
-        return entries
+        return entries;
     }
 }
