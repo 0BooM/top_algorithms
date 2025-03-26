@@ -1,7 +1,7 @@
 class HashMap{
     constructor(){
-        this.bucketArray = new Array[10].fill(null);
-        this.capacity = this.array.length;
+        this.bucketArray = new Array(10).fill(null);
+        this.capacity = this.bucketArray.length;
         this.loadFactor = 0.75;
     }
 
@@ -19,7 +19,7 @@ class HashMap{
 
     //Sets new value at by calculating hashCode using key value
     set(key, value){
-        hashCode = hash(key);
+        hashCode = this.hash(key);
         
         this.bucketArray[hashCode] = value;
         console.log(`Hashcode: ${hashedValue}, bucketArray[haschode]: ${this.bucketArray[hashedValue]} `)
@@ -27,15 +27,25 @@ class HashMap{
 
     // returns value that is asigned to key
     get(key){
-        hashCode = hash(key);
+        hashCode = this.hash(key);
 
         return this.bucketArray[hashCode] ? this.bucketArray[hashCode] : null;
     }
 
     // returns true or false based on whether passed key exists in array or not
     has(key){
-        hashCode = hash(key);
+        hashCode = this.hash(key);
         
-        return this.bucketArray[hashCode] ? true : null;
+        return this.bucketArray[hashCode] ? true : false;
+    }
+    //takes a key as an argument, then removes the entry with that key
+    remove(key){
+        if (!this.has(key)) return false;
+
+        let hashCode = this.hash(key);
+
+        this.bucketArray[hashCode] = null;
+
+        return true;
     }
 }
