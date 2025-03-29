@@ -50,6 +50,14 @@ export default class Tree {
         return node;
     }
 
+    find(value, node = this.root){
+        if(!node) return node;
+        if(node.value === value) return node;
+        if(value < node.value){
+            return this.find(value, node.left)
+        } else return this.find(value, node.right);
+    }
+
 
     prettyPrint(node = this.root, prefix = "", isLeft = true) {
         if (node === null) return;
