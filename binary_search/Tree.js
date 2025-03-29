@@ -88,14 +88,14 @@ export default class Tree {
     postOrder(callback, node = this.root) {
         if (!callback) throw new Error("Callback required!");
         if (!node) return;
-        this.preOrder(callback, node.left);
-        this.preOrder(callback, node.right);
+        this.postOrder(callback, node.left);
+        this.postOrder(callback, node.right);
         callback(node);
     }
 
     height(node) {
         if (!node) return -1;
-        return Math.max(height(node.left), this.height(node.right)) + 1;
+        return Math.max(this.height(node.left), this.height(node.right)) + 1;
     }
 
     depth(node) {
@@ -103,7 +103,7 @@ export default class Tree {
 
         let depth = 0;
         let current = this.root;
-        while (current.value !== node.value && current !== null) {
+        while (current !== null && current.value !== node.value) {
             if (current.value < node.value) {
                 current = current.left;
                 depth++;
@@ -116,8 +116,9 @@ export default class Tree {
     }
 
     isBalanced(node = this.root) {
-        if (!this.root) return true;
-        let diff = Math.abs(this.height(root.left) - this.height(root.right));
+        if (!node) return true;
+
+        let diff = Math.abs(this.height(node.left) - this.height(node.right));
         return (
             diff <= 1 &&
             this.isBalanced(node.left) &&
@@ -125,12 +126,12 @@ export default class Tree {
         );
     }
 
-    rebalance(){
+    rebalance() {
         let values = [];
         this.inOrder((node) => {
             values.push(node.value);
-            root = this.buildTree(values);
-        })
+            this.root = this.buildTree(values);
+        });
     }
 
     prettyPrint(node = this.root, prefix = "", isLeft = true) {
